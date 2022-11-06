@@ -4,4 +4,6 @@
     <string name="name_hint">Name</string>
     <string name="count_hint">Count</string>
     <string name="save_button_text">Save</string>
+    <string name="error_input_name">Incorrect name</string>
+    <string name="error_input_count">Incorrect count</string>
 </resources>
