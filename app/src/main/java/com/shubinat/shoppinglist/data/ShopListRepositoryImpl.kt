@@ -13,7 +13,7 @@ object ShopListRepositoryImpl : ShopListRepository {
 
 
     init {
-        for (i in 0 until 1000) {
+        for (i in 0 until 5) {
             val shopItem = ShopItem("Item $i", i, Random.nextBoolean())
             addShopItem(shopItem)
         }
