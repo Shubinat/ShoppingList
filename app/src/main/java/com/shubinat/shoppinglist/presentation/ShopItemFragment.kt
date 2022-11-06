@@ -18,8 +18,9 @@ import com.shubinat.shoppinglist.domain.ShopItem
 
 class ShopItemFragment : Fragment() {
 
-    private lateinit var viewModel: ShopItemViewModel
+    lateinit var onFinishedListener : OnFinishedListener
 
+    private lateinit var viewModel: ShopItemViewModel
     private lateinit var tilName: TextInputLayout
     private lateinit var etName: EditText
     private lateinit var tilCount: TextInputLayout
@@ -28,6 +29,16 @@ class ShopItemFragment : Fragment() {
 
     private var screenMode = MODE_UNKNOWN
     private var shopItemId = ShopItem.UNDEFINED_ID
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnFinishedListener) {
+            onFinishedListener = context
+        } else{
+            throw RuntimeException("Activity must implement OnFinishedListener")
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -140,9 +151,15 @@ class ShopItemFragment : Fragment() {
             tilName.error = if (it) getString(R.string.error_input_name) else null
         }
         viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
-            activity?.onBackPressed()
+            onFinishedListener.onFinished()
         }
     }
+
+
+    interface OnFinishedListener {
+        fun onFinished()
+    }
+
 
     companion object {
         private const val SCREEN_MODE = "screen_mode"
