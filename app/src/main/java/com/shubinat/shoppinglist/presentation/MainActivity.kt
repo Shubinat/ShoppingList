@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnFinishedListener {
     }
 
     private fun launchFragment(fragment: Fragment) {
+        supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .replace(R.id.shop_item_container, fragment)
             .addToBackStack(null)
